@@ -1,0 +1,37 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/Fissioning-Create/CreateMOAR/issues"
+
+[[mods]]
+modId="createmoar"
+version="${version}"
+displayName="Create: Mother of All Reactors"
+#updateJSONURL="http://myurl.me/" #optional
+displayURL="http://github.com/Fissioning-Create/CreateMOAR"
+logoFile="icon.png"
+credits="Programmed by rbasamoyai"
+authors="rbasamoyai"
+
+description="""Realistic reactors for Create"""
+
+[[dependencies.createmoar]]
+   modId="forge"
+   mandatory=true
+   versionRange = "[${forge_version},)"
+   ordering="NONE"
+   side="BOTH"
+
+[[dependencies.createmoar]]
+   modId="minecraft"
+   mandatory=true
+   versionRange="${minecraft_version}"
+   ordering="NONE"
+   side="BOTH"
+
+[[dependencies.createmoar]]
+   modId = "create"
+   mandatory = true
+   versionRange="${create_version}"
+   ordering = "NONE"
+   side = "BOTH"

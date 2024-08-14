@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "createmoar",
+  "version": "${version}",
+
+  "name": "Create: Mother of All Reactors",
+  "description": "Realistic reactors for Create",
+  "authors": [
+    "rbasamoyai"
+  ],
+  "contact": {
+    "sources": "https://github.com/Fissioning-Create/CreateMOAR",
+    "issues": "https://github.com/Fissioning-Create/CreateMOAR/issues"
+  },
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "rbasamoyai.createmoar.fabric.CreateMOARFabric"
+    ],
+    "client": [
+      "rbasamoyai.createmoar.fabric.MOARClientFabric"
+    ]
+  },
+  "mixins": [
+    "createmoar.mixins.json",
+    "createmoar-common.mixins.json"
+  ],
+  "depends": {
+    "minecraft": "${minecraft_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "create": "${create_version}"
+  }
+}
