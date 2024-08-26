@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "createmoar:block/graphite_reactor_block_end",
+		"1": "createmoar:block/graphite_reactor_block_side",
+		"2": "createmoar:block/graphite_reactor_block_top",
+		"particle": "createmoar:block/graphite_reactor_block_end"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 16, 4],
+			"to": [12, 17, 12],
+			"faces": {
+				"north": {"uv": [0, 8, 8, 9], "texture": "#2"},
+				"east": {"uv": [0, 8, 8, 9], "texture": "#2"},
+				"south": {"uv": [0, 8, 8, 9], "texture": "#2"},
+				"west": {"uv": [0, 8, 8, 9], "texture": "#2"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#2"}
+			}
+		}
+	]
+}

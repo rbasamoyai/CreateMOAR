@@ -1,0 +1,16 @@
+{
+  "atomic_mass": 135,
+  "is_gas": true,
+  "decay_properties": {
+    "half_life": 33120,
+    "energy_released": 1.168
+  },
+  "destroy_on_neutron_capture": true,
+  "thermal_area_properties": {
+    "scattering": 332200,
+    "absorption": 2778000
+  },
+  "fast_area_properties": {
+    "scattering": 4.747
+  }
+}

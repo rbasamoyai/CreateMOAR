@@ -1,0 +1,165 @@
+MOAR todo
+
+Basic prototyping
+- Don't dwell on textures. Throw together solid color if need be.
+- Don't do meltdown or radiation or whatever.
+
+### Simulation ###
+
+Find a suitable scale
+- megamole/m^3 (Mmol/B)
+- kilomole/dm^3 (kmol/mB)
+- Observation: the significand remains the same, but the order of magnitude changes depending on units
+- We want
+
+Source step
+
+Diffusion
+- Implement Fractional Steps Crank-Nicolson by Cen, Hoppe, & Gu (2016)
+  - https://pubs.aip.org/aip/adv/article/6/9/095305/882010/Fast-and-accurate-determination-of-3D-temperature
+  - What is needed:
+    - Solving trigonal matrices
+      - Decomposition?
+      - Read more.
+- Source term for neutrons
+  - Take from reaction data
+  - Based on neutron count from start of tick
+
+- Material changes
+  - Consumption of materials
+  - Fission consumes materials
+  - Based on neutron count from start of tick
+
+Lifecycle of NuclearElementView in one tick
+1. the object is created from the ReactorComponent based off of the already
+   present elements, with all values set
+2. the object may create mutable children view objects for its products, and
+   adds them to the reaction data
+3. if the represented nuclear element itself has a reaction, i.e. the view is
+   mutable, the reaction effects are added to the reaction data
+4. during simulation, the element changes are calculated based on neutron flux
+   and element count *at the start of the simulation tick*
+5. after simulation, element changes are saved to components
+
+###
+
+Efficient block handling
+
+Perhaps store neutron (and heat) data in ReactorCore rather than in block entities?
+- BlockEntities are now only responsible for:
+  - providing materials
+  - receiving updates
+- This allows for having regular blocks do something.
+
+###
+
+- Set up visualizer
+  - Bars
+  - Visualizing enum - can't visualize everything at once
+  - Neutron count (thermal, intermediate, fast (TIF))
+  - Neutron flux (TIF)
+  - Heterogenous cell temperature
+
+###
+
+- Fluid
+
+- Single reactor cell (createmoar:reactor_water_vessel)
+  - Blocks
+  - BlockEntity
+
+Testing fluid mechanics
+- Water is automatically generated and is always full. (Testing)
+- Fuel source exists.
+- A bit of absorber in the cell.
+- False fluid input.
+
+### Heat management ###
+
+ReactorComponent heat methods
+- #getHeatFlow(Level, BlockPos, BlockState, Direction face, double dt) : Map<NuclearElement, HeatInfo>
+  - dt tentative
+
+Material heat properties
+- Neutron => heat interaction
+- Neutron => energy interaction
+- Energy
+
+Making a more robust API for different things
+- Internal neutron flux interaction
+  - Wigner effect
+- Internal heat interaction
+
+###
+
+Light BWR
+
+Review code and consider rewrite
+
+Light PWR
+RBMK
+Heavy Water
+- CANDU
+- forbidden german reactor
+
+Documentation
+- Ponders
+- Do we really have to explain nuclear reactor physics to kids?
+
+###
+
+How does MOAR work on a code level?
+
+Realistic reactor simulation
+=> "realistic" thermal/heat mechanics
+=> steam processing
+=> electricity
+
+How does MOAR work at a gameplay level?
+=> Build reactor
+=> Build coolant processors
+=> Build steam processors
+=> Built electricity generators
+=> Connect these things together
+=> ???
+=> Electricity :)
+*Reactor control also needed.
+
+###
+Reactor simulation
+###
+
+How does a fission reactor work?
+- Reactor requires fuel, coolant, moderator, and absorbers.
+- This makes fission reactions that generate heat and the neutrons that sustain the reactor.
+- The coolant (a working fluid, e.g. water, air) absorbs the heat for further thermal work.
+- Pump coolant into reactor.
+- Fluid heats up, may change state (e.g. steam for BWRs).
+- Fluid is pumped/vented out of the reactor for further processing.
+- Absorbers control the reactor by absorbing neutrons.
+
+How does the reactor simulation work?
+- Reactor does number crunching and data update outside of tick so as to be done all at once.
+- Reactors are freeform and are made up of reactor cells.
+- This mandates that all reactor cells must be loaded in the world.
+- Reactors mainly simulate nuclear interactions and thermal interactions.
+  - These two are interrelated through certain phenomena that should be simulated.
+- Reactors have multiple timesteps in a single tick - up to 10!
+- Reactor cells contain data on substances inside the cell that play a part in nuclear and thermal simulation.
+  - Gases are by concentration.
+  - Liquids and solids are by volume.
+    - Solid/liquid expansion is considered negligible.
+  - Molecular counts are derived from these values.
+  - Liquids and gases are associated with pressure, which has major physical effects.
+- Neutrons and heat can transfer between cells and even the world.
+- Blocks next to reactor cells can change the behavior of neutron transfer.
+- Different materials have to be handled differently with respect to heat transfer in a heterogenous reactor cell.
+  - The difference between melting graphite/lead/concrete/steel into corium vs. boiling water.
+
+Reactor basics
+- A vessel.
+- Fuel assembly with fissionable and fertile elements, i.e. U-235 and U-238. May also have oxygen.
+- Control rods with high absorption.
+- A source of coolant, i.e. water.
+- An output for hot coolant, i.e. steam.
+- Holes for inserting fuel assembly and control rods.

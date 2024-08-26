@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createmoar:block/fuel_bundle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "createmoar:block/fuel_bundle"
+    },
+    "axis=z": {
+      "model": "createmoar:block/fuel_bundle",
+      "x": 90
+    }
+  }
+}

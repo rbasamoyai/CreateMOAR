@@ -1,0 +1,12 @@
+{
+  "atomic_mass": 56,
+  "density": 7.9,
+  "thermal_area_properties": {
+    "scattering": 12.19,
+    "absorption": 2.595
+  },
+  "fast_area_properties": {
+    "scattering": 2.588,
+    "absorption": 0.002990
+  }
+}

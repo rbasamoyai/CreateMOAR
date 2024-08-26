@@ -1,0 +1,22 @@
+{
+  "atomic_mass": 238,
+  "density": 19,
+  "neutron_capture_product": "createmoar:uranium_239",
+  "fission_properties": {
+    "spontaneous_fission_rate": 0.0136,
+    "products": {
+      "createmoar:iodine_135": 0.06
+    },
+    "released_energy": 200,
+    "neutron_multiplier": 2.4
+  },
+  "thermal_area_properties": {
+    "scattering": 9.240,
+    "absorption": 2.683
+  },
+  "fast_area_properties": {
+    "scattering": 4.775,
+    "absorption": 0.06992,
+    "fission": 0.3099
+  }
+}

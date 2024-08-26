@@ -1,0 +1,22 @@
+{
+  "atomic_mass": 235,
+  "density": 19,
+  "fission_properties": {
+    "spontaneous_fission_rate": 0.0003,
+    "products": {
+      "createmoar:iodine_135": 0.06
+    },
+    "released_energy": 200,
+    "neutron_multiplier": 2.4
+  },
+  "thermal_area_properties": {
+    "scattering": 14.11,
+    "absorption": 99.38,
+    "fission": 586.7
+  },
+  "fast_area_properties": {
+    "scattering": 4.439,
+    "absorption": 1.858,
+    "fission": 1.220
+  }
+}

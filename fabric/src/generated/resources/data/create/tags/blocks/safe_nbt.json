@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "createmoar:graphite_reactor_block",
+    "createmoar:fuel_bundle"
+  ]
+}

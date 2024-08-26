@@ -1,0 +1,7 @@
+{
+	"parent": "createmoar:block/rod_base",
+	"textures": {
+    "side": "createmoar:block/fuel_bundle",
+		"end": "createmoar:block/fuel_bundle_top"
+	}
+}

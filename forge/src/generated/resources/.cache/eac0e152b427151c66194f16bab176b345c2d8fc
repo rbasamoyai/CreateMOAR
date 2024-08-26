@@ -1,0 +1,10 @@
+// 1.20.1	2024-08-25T14:54:30.391933	Create: Mother of All Reactors/Registrate Provider for createmoar [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+a043fa641dd76419385d6cfc460aa1e151abd3fa assets\createmoar\models\item\graphite_reactor_block.json
+f56b59a058eb15f1d3f68d703192e8303c62eaf4 assets\createmoar\lang\en_us.json
+980ab0dcb74ecdfcc76eecfec26a295c7e9ee8f8 assets\createmoar\blockstates\fuel_bundle.json
+b56d0fe5ccf2bc63a2817d016bd899ecf58dda40 data\createmoar\loot_tables\blocks\fuel_bundle.json
+20d00822b5eb496dc3688713dd6e707e8be2460b data\create\tags\blocks\safe_nbt.json
+b8cd0ff8e37b5f984f3d6a4fadd0f4774dc03163 assets\createmoar\models\item\fuel_bundle.json
+7736722dfd90558416e2c90ffe26759148d0a684 assets\createmoar\blockstates\graphite_reactor_block.json
+1bcf3e32fb6825a26de453d4a845d6e87c9ac798 assets\createmoar\lang\en_ud.json
+9a5c983c8bd5417ba14b993eb9195695a07c6fa4 data\createmoar\loot_tables\blocks\graphite_reactor_block.json

@@ -23,6 +23,9 @@
     ],
     "client": [
       "rbasamoyai.createmoar.fabric.MOARClientFabric"
+    ],
+    "fabric-datagen": [
+      "rbasamoyai.createmoar.fabric.CreateMOARDataFabric"
     ]
   },
   "mixins": [

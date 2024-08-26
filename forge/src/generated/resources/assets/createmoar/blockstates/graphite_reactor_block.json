@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "createmoar:block/graphite_reactor_block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "createmoar:block/graphite_reactor_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createmoar:block/graphite_reactor_block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "createmoar:block/graphite_reactor_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "createmoar:block/graphite_reactor_block"
+    },
+    "facing=west": {
+      "model": "createmoar:block/graphite_reactor_block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

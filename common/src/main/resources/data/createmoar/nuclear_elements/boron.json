@@ -1,0 +1,8 @@
+{
+  "atomic_mass": 10,
+  "density": 2,
+  "thermal_area_properties": {
+    "scattering": 2,
+    "absorption": 200
+  }
+}

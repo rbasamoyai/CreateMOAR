@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import rbasamoyai.createmoar.CreateMOAR;
+import rbasamoyai.createmoar.index.forge.ModGroupImpl;
 import rbasamoyai.createmoar.utils.EnvExecute;
 
 @Mod(CreateMOAR.MOD_ID)
@@ -19,6 +20,7 @@ public class CreateMOARForge {
 
         CreateMOAR.REGISTRATE.registerEventListeners(modBus);
         CreateMOAR.init();
+        ModGroupImpl.registerForge(modBus);
 
         modBus.addListener(this::onCommonSetup);
 

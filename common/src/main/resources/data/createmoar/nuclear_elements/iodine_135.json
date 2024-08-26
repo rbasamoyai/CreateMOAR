@@ -1,0 +1,18 @@
+{
+  "atomic_mass": 135,
+  "is_gas": true,
+  "decay_properties": {
+    "products": {
+      "createmoar:xenon_135": 1
+    },
+    "half_life": 23652
+  },
+  "destroy_on_neutron_capture": true,
+  "thermal_area_properties": {
+    "scattering": 3.218,
+    "absorption": 0.002958
+  },
+  "fast_area_properties": {
+    "scattering": 4.719
+  }
+}

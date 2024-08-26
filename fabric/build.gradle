@@ -7,6 +7,33 @@ architectury {
     fabric()
 }
 
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+
+    runs {
+        data {
+            client()
+
+            name "Fabric Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${project.rootProject.file("fabric/src/generated/resources")}"
+            vmArg "-Dfabric-api.datagen.modid=createmoar"
+            vmArg "-Dporting_lib.datagen.existing_resources=${project.rootProject.file("common/src/main/resources")}"
+            vmArg "-Dcreatemoar.datagen.platform=fabric"
+        }
+        data1 {
+            client()
+
+            name "Forge Data Generation (via Fabric)"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${project.rootProject.file("forge/src/generated/resources")}"
+            vmArg "-Dfabric-api.datagen.modid=createmoar"
+            vmArg "-Dporting_lib.datagen.existing_resources=${project.rootProject.file("common/src/main/resources")}"
+            vmArg "-Dcreatemoar.datagen.platform=forge"
+        }
+    }
+}
+
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
@@ -102,6 +129,13 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
+    }
+}
+
+sourceSets.main {
+    resources { // include generated resources in resources
+        srcDir("src/generated/resources")
+        exclude("src/generated/resources/.cache")
     }
 }
 
