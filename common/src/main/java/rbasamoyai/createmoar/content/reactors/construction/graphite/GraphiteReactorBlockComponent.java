@@ -35,7 +35,7 @@ public class GraphiteReactorBlockComponent implements ReactorComponent {
     @Override
     public List<NuclearElementView> getElements() {
         List<NuclearElementView> elements = new ArrayList<>();
-        elements.add(ConstantElementView.fromVolume(MOARNuclearElements.GRAPHITE, 7000, this::addProduct));
+        elements.add(ConstantElementView.fromVolume(MOARNuclearElements.GRAPHITE, 0.7, this::addProduct));
         if (this.be != null)
             elements.addAll(this.be.getContainedElements());
         return elements;
@@ -43,7 +43,7 @@ public class GraphiteReactorBlockComponent implements ReactorComponent {
 
     @Override
     public double getTotalVolume() {
-        return 8000; // TODO config?
+        return 1; // TODO config?
     }
 
     protected void addProduct(NuclearElement element, double amount) {

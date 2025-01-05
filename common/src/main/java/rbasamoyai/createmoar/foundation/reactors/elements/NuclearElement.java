@@ -49,7 +49,9 @@ public class NuclearElement {
                           @Nullable AreaProperties fastAreaProperties) {
 		this(id);
 		this.atomicMass = atomicMass;
-		this.density = density * 1000; // g/cm^3 => g/dm^3 = g/L = g/mb = g/(81 droplets)
+        // Uncomment multiplier for meter scale density.
+        // When not commented, MOAR is effectively blowing up a centimeter-scale reactor to a meter-scale reactor.
+		this.density = density;// * 1000; // g/cm^3 => g/dm^3 = g/L = g/mb = g/(81 droplets)
         this.isGas = isGas;
         this.destroyedByNeutronCapture = destroyedByNeutronCapture || neutronCaptureProduct != null;
 		this.neutronCaptureProduct = neutronCaptureProduct;
@@ -74,7 +76,7 @@ public class NuclearElement {
     public boolean isDestroyedByNeutronCapture() { return this.destroyedByNeutronCapture; }
 
     /**
-     * @param volume in dm^3 (= 1000 cm^3 = 1 L = 1 mB = 81 droplets)
+     * @param volume in m^3 (= blocks = 1000 mB = 81000 droplets)
      * @return the substance amount in moles (where 1 mol ≈ 6.022 x 10^23 molecules)
      * @implNote This should not be used if {@link #isGas()} returns true.
      */
