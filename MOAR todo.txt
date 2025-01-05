@@ -6,24 +6,38 @@ Basic prototyping
 
 ### Simulation ###
 
-Find a suitable scale
-- megamole/m^3 (Mmol/B)
-- kilomole/dm^3 (kmol/mB)
-- Observation: the significand remains the same, but the order of magnitude changes depending on units
-- We want
+Suitable scale: centimeter-scale physics at the block scale - but heat is "ramped up"
+How to manage fuel rods?
 
 Source step
-
-Diffusion
-- Implement Fractional Steps Crank-Nicolson by Cen, Hoppe, & Gu (2016)
-  - https://pubs.aip.org/aip/adv/article/6/9/095305/882010/Fast-and-accurate-determination-of-3D-temperature
-  - What is needed:
-    - Solving trigonal matrices
-      - Decomposition?
-      - Read more.
 - Source term for neutrons
   - Take from reaction data
   - Based on neutron count from start of tick
+
+Diffusion
+[X] Prototype 1D Crank-Nicolson in Python
+[X] Prototype 1D Crank-Nicolson outside of Minecraft in Java
+[X] Prototype 2D Fractional Steps Crank-Nicolson by Cen, Hoppe, & Gu (2016) outside of Minecraft
+  - https://pubs.aip.org/aip/adv/article/6/9/095305/882010/Fast-and-accurate-determination-of-3D-temperature
+  - https://doi.org/10.1063/1.4962665
+[X] Prototype 2D FSCN, but using mutable doubles
+  - Goal is to see if avoiding copies is feasible
+  - Compare with original. (It seems that it is 50% slower.)
+[X] Prototype 3D Fractional Steps Crank-Nicolson outside of Minecraft
+  - ~0.4 ms for the worst case scenarios (10000 block reactors), probably a bit worse
+  - Average large reactor (1000 block reactor) still looks OK (around same OoM perf for the 20x20 2D reactor)
+[X] Figure out suitable material scale.
+
+TODO 01.04.2025
+[ ] Implement prototype of 3D Fractional Steps Crank-Nicolson in Minecraft + MOAR
+  - Don't worry too much about optimization at this point...
+[ ] Benchmark prototype using Spark
+  - Keep note of performance
+  - Profile aggressively
+[ ] Make decisions based on profiling
+  - How much can the MOAR implementation be optimized?
+  - Should the MOAR implementation use a larger timestep and distributed calculations?
+[ ] Figure out suitable diffusion scale.
 
 - Material changes
   - Consumption of materials
