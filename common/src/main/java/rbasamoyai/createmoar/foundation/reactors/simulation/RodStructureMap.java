@@ -139,46 +139,77 @@ public class RodStructureMap<T> {
      */
     public boolean set(BlockPos pos, T t) {
         boolean merged = false;
+
+        for (Direction.Axis axis : Iterate.axes) {
+            ObjectObjectMutablePair<BlockPos, List<T>> currentRod = this.getMutableRodContainingCoordinate(axis, pos);
+            if (currentRod == null) {
+                List<T> newRod = Lists.newArrayList(t);
+                this.addRod(axis, pos, newRod);
+                this.setBackReference(axis, pos, new ObjectObjectMutablePair<>(pos, newRod));
+            } else {
+                currentRod.right().set(getIndexAlongAxis(axis, currentRod.left(), pos), t);
+                this.setBackReference(axis, pos, currentRod);
+                merged = true; // If set up correctly, no list merging should be required.
+            }
+        }
+        return merged || this.tryMergingRodsAtSpot(pos);
+    }
+
+    /**
+     * Attempts to merge rods at the given position.
+     *
+     * @param pos the position to merge
+     * @return true if already merged on at least one axis, false if unable to merge or spot is empty
+     */
+    public boolean tryMergingRodsAtSpot(BlockPos pos) {
+        boolean merged = false;
         pos = pos.immutable();
         BlockPos.MutableBlockPos selector = new BlockPos.MutableBlockPos();
 
         for (Direction.Axis axis : Iterate.axes) {
-            Pair<BlockPos, List<T>> currentRod = this.getMutableRodContainingCoordinate(axis, pos);
-            if (currentRod != null) {
-                currentRod.right().set(getIndexAlongAxis(axis, currentRod.left(), pos), t);
-                merged = true;
-                continue;
-            }
+            ObjectObjectMutablePair<BlockPos, List<T>> currentRod = this.getMutableRodContainingCoordinate(axis, pos);
+            if (currentRod == null)
+                return false; // If set up correctly, no axis has a rod at pos.
 
             Direction positive = Direction.fromAxisAndDirection(axis, Direction.AxisDirection.POSITIVE);
-            Direction negative = positive.getOpposite();
 
             // Really dependent on the structure being set up correctly!
-            ObjectObjectMutablePair<BlockPos, List<T>> negativeRod = this.getMutableRodContainingCoordinate(axis, selector.setWithOffset(pos, negative));
-            ObjectObjectMutablePair<BlockPos, List<T>> positiveRod = this.getMutableRodContainingCoordinate(axis, selector.setWithOffset(pos, positive));
+            ObjectObjectMutablePair<BlockPos, List<T>> negativeRod = this.getMutableRodContainingCoordinate(axis,
+                selector.setWithOffset(pos, positive.getOpposite()));
+            ObjectObjectMutablePair<BlockPos, List<T>> positiveRod = this.getMutableRodContainingCoordinate(axis,
+                selector.setWithOffset(pos, positive));
 
             if (negativeRod != null && positiveRod != null) {
-                negativeRod.right().add(t);
+                // If set up correctly, currentRod has only one element at pos.
+                negativeRod.right().add(currentRod.right().get(0));
                 negativeRod.right().addAll(positiveRod.right());
 
-                // Update back-references on positive rod elements
-                Direction dir = Direction.fromAxisAndDirection(axis, Direction.AxisDirection.POSITIVE);
+                // Update back-references on pos and positive rod positions
+                this.setBackReference(axis, pos, negativeRod);
                 int sz = positiveRod.right().size();
                 for (int i = 0; i < sz; ++i)
-                    this.setBackReference(axis, pos.relative(dir, i), negativeRod);
+                    this.setBackReference(axis, pos.relative(positive, i + 1), negativeRod);
                 this.removeRodInternal(axis, positiveRod.left());
                 merged = true;
             } else if (negativeRod != null) {
-                negativeRod.right().add(t);
+                negativeRod.right().addAll(currentRod.right());
+
+                // Update back-references on current rod positions
+                int sz = currentRod.right().size();
+                for (int i = 0; i < sz; ++i)
+                    this.setBackReference(axis, pos.relative(positive, i), negativeRod);
                 merged = true;
             } else if (positiveRod != null) {
                 // Unlike the negative-positive merger, the same rod pair reference should be shared.
                 // Therefore, it is critical for the structure to be set up correctly!
                 positiveRod.left(pos);
-                positiveRod.right().add(0, t);
+                positiveRod.right().addAll(0, currentRod.right());
+
+                // Update back-references on current rod positions
+                int sz = currentRod.right().size();
+                for (int i = 0; i < sz; ++i)
+                    this.setBackReference(axis, pos.relative(positive, i), positiveRod);
                 merged = true;
-            } else {
-                this.addRod(axis, pos, Lists.newArrayList(t));
             }
         }
         return merged;
