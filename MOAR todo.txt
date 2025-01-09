@@ -28,12 +28,15 @@ Diffusion
   - Average large reactor (1000 block reactor) still looks OK (around same OoM perf for the 20x20 2D reactor)
 [X] Figure out suitable material scale.
 
-TODO 01.04.2025
+TODO now-01.11.2025
+[ ] Rewrite ReactorCore construction to more directly interface with rods
+[ ] Rewrite ReactorCore data gathering to rely more on mutable objects
 [ ] Implement prototype of 3D Fractional Steps Crank-Nicolson in Minecraft + MOAR
   - Don't worry too much about optimization at this point...
 [ ] Benchmark prototype using Spark
   - Keep note of performance
   - Profile aggressively
+
 [ ] Make decisions based on profiling
   - How much can the MOAR implementation be optimized?
   - Should the MOAR implementation use a larger timestep and distributed calculations?
